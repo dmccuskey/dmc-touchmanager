@@ -93,6 +93,7 @@ end
 
 dmc_lib_data = _G.__dmc_corona
 dmc_lib_info = dmc_lib_data.dmc_library
+local VERSION = "0.1.1"
 
 
 
