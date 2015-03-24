@@ -15,7 +15,6 @@ local TouchMgr = require 'dmc_touchmanager'
 -- setup our function-type event call
 --
 local handler = function( event )
-	local target = event.target
 
 	if event.phase == 'began' then
 
