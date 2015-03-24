@@ -204,7 +204,7 @@ local function createMasterTouchHandler( master_data )
 			if g_mgr and g_mgr.shouldDelayBeganTouches then
 				-- pass, TODO
 			else
-				response = struct:dispatch( event )
+				if struct:dispatch( event ) then response=true end
 			end
 
 		elseif phase=='moved' then
@@ -212,7 +212,7 @@ local function createMasterTouchHandler( master_data )
 			if g_mgr and g_mgr.shouldDelayBeganTouches then
 				-- pass, TODO
 			else
-				response = struct:dispatch( event )
+				if struct:dispatch( event ) then response=true end
 			end
 
 
@@ -221,7 +221,7 @@ local function createMasterTouchHandler( master_data )
 			if g_mgr and g_mgr.shouldDelayEndedTouches then
 				-- pass, TODO
 			else
-				response = struct:dispatch( event )
+				if struct:dispatch( event ) then response=true end
 			end
 		end
 
