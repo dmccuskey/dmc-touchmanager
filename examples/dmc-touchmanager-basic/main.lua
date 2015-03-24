@@ -248,9 +248,9 @@ local function main()
 	o, h = setup_function_example()
 	TouchMgr.register( o, h )
 
-	timer.performWithDelay( 20000, function()
-		TouchMgr.unregister( o, h )
-	end)
+	-- timer.performWithDelay( 20000, function()
+	-- 	TouchMgr.unregister( o, h )
+	-- end)
 
 end
 
