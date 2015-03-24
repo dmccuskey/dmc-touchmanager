@@ -236,7 +236,7 @@ end
 -- registered with the Touch Manager
 --
 local function createTouchStructure( t_obj )
-	assert( t_obj )
+	-- assert( t_obj )
 	return {
 		--[[
 		Touch Object
@@ -266,7 +266,7 @@ local function createTouchStructure( t_obj )
 		t_ended = {},
 
 		_killActiveEvents=function( self, handler, active )
-			assert( handler and active )
+			-- assert( handler and active )
 			local isFunc = (type(handler)=='function')
 			-- create dummy event to end touch
 			local evt = {
@@ -290,7 +290,7 @@ local function createTouchStructure( t_obj )
 		end,
 
 		dispatch=function( self, event )
-			assert( event )
+			-- assert( event )
 			local response = false
 			for _, handler in pairs( self.listener ) do
 				if type(handler)=='function' then
@@ -303,12 +303,12 @@ local function createTouchStructure( t_obj )
 		end,
 
 		addListener=function( self, handler )
-			assert( handler )
+			-- assert( handler )
 			self.listener[ handler ] = handler
 		end,
 
 		removeListener=function( self, handler, active )
-			assert( handler )
+			-- assert( handler )
 			local h = self.listener[ handler ]
 			assert( handler==h, "handlers to not match" )
 			self.listener[ handler ] = nil
@@ -509,13 +509,13 @@ end
 -- Registered Gesture Managers
 
 function TouchMgr._getRegisteredManager( t_obj )
-	assert( t_obj )
+	-- assert( t_obj )
 	local struct = TouchMgr._getTouchStructure( t_obj )
 	return struct.g_mgr
 end
 
 function TouchMgr._setRegisteredManager( g_mgr )
-	assert( g_mgr and g_mgr.view )
+	-- assert( g_mgr and g_mgr.view )
 	local struct = TouchMgr._getRegisteredObjectStruct( g_mgr.view )
 	assert( struct.g_mgr==nil )
 	g_mgr.touch_manager = TouchMgr
@@ -538,17 +538,17 @@ end
 
 
 function TouchMgr._getRegisteredTouch( event_id )
-	assert( event_id )
+	-- assert( event_id )
 	return TouchMgr._FOCUS[ event_id ]
 end
 
 function TouchMgr._setRegisteredTouch( event_id, t_obj )
-	assert( event_id and t_obj )
+	-- assert( event_id and t_obj )
 	TouchMgr._FOCUS[ event_id ] = t_obj
 end
 
 function TouchMgr._unsetRegisteredTouch( event_id )
-	assert( event_id )
+	-- assert( event_id )
 	local o = TouchMgr._FOCUS[ event_id ]
 	TouchMgr._FOCUS[ event_id ] = nil
 	return o
