@@ -177,6 +177,7 @@ local function setup_function_example()
 	local handler = function( event )
 		-- print( "handler", event, event.phase )
 		local target = event.target -- our display object, 'o'
+		local tp -- visual touch point
 
 		if event.phase=='began' then
 
