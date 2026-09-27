@@ -1,7 +1,7 @@
 --===================================================================--
 -- dmc_corona/dmc_touchmanager.lua
 --
--- Documentation: http://docs.davidmccuskey.com/dmc-touchmanager
+-- Documentation: https://github.com/dmccuskey/dmc-touchmanager
 --===================================================================--
 
 --[[
@@ -134,10 +134,8 @@ An object which coordinates one or many Gesture Receivers
 
 dmc_lib_data.dmc_touchmanager = dmc_lib_data.dmc_touchmanager or {}
 
-local DMC_TOUCHMANAGER_DEFAULTS = {
-	default_color_format='dRGBA',
-	-- named_color_file, no default,
-}
+-- dmc-touchmanager has no settings
+local DMC_TOUCHMANAGER_DEFAULTS = {}
 
 local dmc_touchmanager_data = Utils.extend( dmc_lib_data.dmc_touchmanager, DMC_TOUCHMANAGER_DEFAULTS )
 
@@ -403,11 +401,7 @@ end
 -- @param g_mgr a Gesture Manager
 --
 function TouchMgr.unregisterGestureMgr( g_mgr )
-	local r = TouchMgr._getRegisteredObject( g_mgr )
-		if r then
-			TouchMgr._setRegisteredObject( obj, nil )
-			obj:removeEventListener( 'touch', r.callback )
-		end
+	TouchMgr._removeRegisteredManager( g_mgr )
 end
 
 
@@ -529,6 +523,10 @@ function TouchMgr._setRegisteredManager( g_mgr )
 	assert( struct.g_mgr==nil )
 	g_mgr.touch_manager = TouchMgr
 	struct.g_mgr = g_mgr
+end
+
+function TouchMgr._removeRegisteredManager( g_mgr )
+	return TouchMgr._removeRegisteredObjectStruct( g_mgr.view )
 end
 
 
