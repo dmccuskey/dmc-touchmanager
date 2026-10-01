@@ -8,7 +8,7 @@ How dmc-touchmanager is built and tested, and what could change.
 
 The `dmc_corona.cfg` files, at the root and in the example, aren't generated: edit them here.
 
-dmc-touchmanager uses no other DMC library; its copy of `Utils.extend()` is built in. [dmc-gestures](https://github.com/dmccuskey/dmc-gestures) and [DMC-Corona-UI](https://github.com/dmccuskey/DMC-Corona-UI) use it, and [DMC-Corona-Library](https://github.com/dmccuskey/DMC-Corona-Library) bundles it: after a change here, rebuild them.
+dmc-touchmanager uses no other DMC library. [dmc-gestures](https://github.com/dmccuskey/dmc-gestures) and [DMC-Corona-UI](https://github.com/dmccuskey/DMC-Corona-UI) use it, and [DMC-Corona-Library](https://github.com/dmccuskey/DMC-Corona-Library) bundles it: after a change here, rebuild them.
 
 ## Building
 
@@ -23,7 +23,15 @@ The build copies the sibling checkouts as they are on disk, on whatever branch e
 
 ## Testing
 
-There are no automated tests. Run the example in the Solar2D Simulator: it shows a dot under each touch an object holds.
+The unit tests in `tests/dmc_touchmanager_spec.lua` use lunatest, with stand-ins for Solar2D's `Runtime`, `system` and display objects: a touch goes to each object under it, top first, until a listener returns `true`, then to `Runtime`, as in Solar2D. Run them with Lua 5.1 from this folder:
+
+```sh
+tests/run_unit.sh                  # uses ../tools/lua51/bin/lua; set LUA= for another
+```
+
+The last line should read `17 passed, 0 failed, 0 error(s), 0 skipped.` They cover both listener styles, registration order, focused touches over other objects and at `Runtime`, `unregister()` (the `cancelled` event, released focus, unknown handlers, during a dispatch), removed objects and gesture managers.
+
+For the rest, run the example in the Solar2D Simulator: it shows a dot under each touch an object holds.
 
 The Simulator has one touch, the mouse. To try several touches without a device, send made-up events from the end of the example's `main.lua`: a `began` to the object, `square:dispatchEvent{ name='touch', phase='began', id=A, target=square, x=..., y=... }`, then `moved` and `ended` for the same id to `Runtime:dispatchEvent{ ... }`, which is where Solar2D sends a touch that is off every object. Any table works as a touch id. The Quick Start and the example's screenshot were checked this way, with two touch ids on one object.
 
@@ -31,6 +39,4 @@ The Simulator has one touch, the mouse. To try several touches without a device,
 
 Each needs discussion and a concrete use case before it is worked on. The bugs are listed in the API reference's [Known Issues](api.md#known-issues).
 
-- Unit tests under plain Lua, with stand-ins for `Runtime`, `system` and display objects.
-- Release focus and forget the object when it is removed (`finalize` event), and in `unregister()`.
-- Delayed touches for gesture managers (`shouldDelayBeganTouches`, `shouldDelayEndedTouches`), or remove the flags.
+- Delayed touches for gesture managers: hold a touch's events back from the object's handlers until the gesture manager decides whether it's a gesture, as UIKit's `delaysTouchesBegan` does. 2.0.0 had unused `shouldDelayBeganTouches` and `shouldDelayEndedTouches` flags for it; 2.1.0 removed them.

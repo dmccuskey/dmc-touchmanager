@@ -20,6 +20,7 @@ New here? The [Quick Start](../README.md#quick-start) makes a square that holds 
 
 ```text
 README.md                   landing page and Quick Start
+CHANGELOG.md                what changed in each version
 LICENSE
 docs/                       this documentation
 └── images/                 screenshots for the README
@@ -30,4 +31,5 @@ dmc_corona.cfg              library configuration
 examples/                   sample app, with its own generated dmc_corona/
 └── screenshots/            one per app, for examples/README.md
 Snakefile                   build rules for the generated copies
+tests/                      unit tests (lunatest); run_unit.sh runs them with Lua 5.1
 ```
