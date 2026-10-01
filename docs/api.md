@@ -129,4 +129,4 @@ dmc-touchmanager has no settings: there is no `[DMC_TOUCHMANAGER]` section in `d
 
 ## Known Issues
 
-- **Focused touches can be lost** over an unregistered object whose touch listener returns `true`, or while `stage:setFocus()` is set on another object (as Solar2D's `widget` library does): the Touch Manager never sees those events. If the lost event is the `ended`, the touch stays focused. Register every object that handles touches, or have their listeners return `false` for touches they didn't begin.
+- **Focused touches can be lost** over an unregistered object whose touch listener returns `true`, or while `stage:setFocus()` is set on another object (as Solar2D's `widget` library does): the Touch Manager never sees those events. If the lost event is the `ended`, the touch stays focused. Register every object that handles touches, or have their listeners return `false` for touches they didn't begin. ([Issue #1](https://github.com/dmccuskey/dmc-touchmanager/issues/1))

@@ -39,4 +39,4 @@ The Simulator has one touch, the mouse. To try several touches without a device,
 
 Each needs discussion and a concrete use case before it is worked on. The bugs are listed in the API reference's [Known Issues](api.md#known-issues).
 
-- Delayed touches for gesture managers: hold a touch's events back from the object's handlers until the gesture manager decides whether it's a gesture, as UIKit's `delaysTouchesBegan` does. 2.0.0 had unused `shouldDelayBeganTouches` and `shouldDelayEndedTouches` flags for it; 2.1.0 removed them.
+- Delayed touches for gesture managers: hold a touch's events back from the object's handlers until the gesture manager decides whether it's a gesture, as UIKit's `delaysTouchesBegan` does. 2.0.0 had unused `shouldDelayBeganTouches` and `shouldDelayEndedTouches` flags for it; 2.1.0 removed them. ([Issue #2](https://github.com/dmccuskey/dmc-touchmanager/issues/2))
